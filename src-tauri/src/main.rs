@@ -7,6 +7,7 @@ fn greet(name: &str) -> String {
     format!("Hello, {}! You've been greeted from Rust!", name)
 }
 
+//noinspection ALL
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![greet])
@@ -16,9 +17,6 @@ fn main() {
 
 
 use std::io::Write;
-
-
-
 
 
 // todo add tauri
@@ -154,4 +152,14 @@ pub fn resolve_d_issue(/*&mut self*/issues: Vec<BugDetail>) -> BugDetail {
     BugDetail::builder().build()
 }
 
+
+// create a new issue button functionality (add to vec of issues)
+
+#[tauri::command]
+fn button_create_issue() {
+    let mut issues = vec![];
+    let issue = create_issue();
+    issues.push(issue);
+    resolve_d_issue(issues);
+}
 
